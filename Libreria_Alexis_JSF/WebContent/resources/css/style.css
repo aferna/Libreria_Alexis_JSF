@@ -1,0 +1,25 @@
+body{
+	text-align: center;
+	margin: auto;
+}
+
+#content{
+	display: inline-block;
+}
+
+label{
+	margin-top: 5px;
+	text-align: left;
+}
+
+table td{
+	text-align: left;
+}
+
+.field {
+	width: 350px;
+	height: 250px;
+	border: 1px;
+	border-color: rgb(224, 224, 224);
+	border-style: solid;
+}

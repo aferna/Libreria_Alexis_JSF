@@ -1,0 +1,61 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="content">
+	    	<h:dataTable value="#{consultasLibreriaBean.consultarLibros()}"
+    	             var="libro" class="table table-hover">
+    	             
+    	             <h:column>
+    	               <!-- Cabecera de la columna -->
+    	               <f:facet name="header">
+    	               		<f:verbatim>ID</f:verbatim>
+    	               </f:facet>
+    	               
+    	               <!-- Valor de la columna -->
+    	               <h:outputText value="#{libro.isbn}"/>
+    	               
+    	               <!-- Pie de la columna -->
+<!--     	               <f:facet name="footer"> -->
+<!--     	               		<f:verbatim>Pie del ID</f:verbatim> -->
+<!--     	               </f:facet> -->
+    	             
+    	             </h:column>
+    	             
+    	             <h:column>
+<!--     	               Cabecera de la columna -->
+    	               <f:facet name="header">
+    	               		<f:verbatim>TITULO</f:verbatim>
+    	               </f:facet>
+    	               
+<!--     	               Valor de la columna -->
+    	               <h:outputText value="#{libro.titulo}"/>
+    	               
+<!--     	               Pie de la columna -->
+<!--     	               <f:facet name="footer"> -->
+<!--     	               		<f:verbatim>Pie de Descripcion</f:verbatim> -->
+<!--     	               </f:facet> -->
+    	             
+    	             </h:column>
+    	             
+    	             <h:column>
+<!--     	               Cabecera de la columna -->
+    	               <f:facet name="header">
+    	               		<f:verbatim>PRECIO</f:verbatim>
+    	               </f:facet>
+    	               
+<!--     	               Valor de la columna -->
+    	               <h:outputText value="#{libro.precio} €"/>
+    	               
+<!--     	               Pie de la columna -->
+<!--     	               <f:facet name="footer"> -->
+<!--     	               		<f:verbatim>Pie del Precio</f:verbatim> -->
+<!--     	               </f:facet> -->
+    	             
+    	             </h:column>
+    	
+    	</h:dataTable>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,104 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="content">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#altaLibro" data-toggle="tab">Alta
+					Libro</a></li>
+			<li><a href="#altaAutor" data-toggle="tab">Alta Autor</a></li>
+			<li><a href="#altaEditorial" data-toggle="tab">Alta
+					Editorial</a></li>
+		</ul>
+		<div class="tab-content">
+			<div class="tab-pane active" id="altaLibro">
+				<h:form class="form-horizontal">
+					<div class="form-group form-group-sm">
+						<h:outputLabel class="col-sm-2 control-label" for="isbn"
+							value="#{msg.formISBN}" />
+						<div class="col-sm-10">
+							<h:inputText class="form-control" id="isbn"
+								value="#{gestionLibreriaBean.isbn}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<h:outputLabel class="col-sm-2 control-label" for="titulo"
+							value="#{msg.formTitulo}" />
+						<div class="col-sm-10">
+							<h:inputText class="form-control" id="titulo"
+								value="#{gestionLibreriaBean.titulo}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<h:outputLabel class="col-sm-2 control-label" for="anio"
+							value="#{msg.formPublicacion}" />
+						<div class="col-xs-4">
+							<h:inputText class="form-control" id="anio" maxlength="4"
+								value="#{gestionLibreriaBean.anio}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<h:outputLabel class="col-sm-2 control-label" for="precio"
+							value="#{msg.formPrecio}" />
+						<div class="col-xs-4">
+							<h:inputText class="form-control" id="precio" maxlength="5"
+								value="#{gestionLibreriaBean.precio}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<h:outputLabel class="col-sm-2 control-label" for="descripcion"
+							value="#{msg.formDescripcion}" />
+						<div class="col-sm-10">
+							<h:inputTextarea class="form-control" id="descripcion"
+								value="#{gestionLibreriaBean.descripcion}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<h:outputLabel class="col-sm-2 control-label"
+							value="#{msg.formEditorial}" />
+						<div class="col-sm-10">
+
+							<h:selectOneMenu class="form-control"
+								value="#{gestionLibreriaBean.idEditorial}">
+								<f:selectItems
+									value="#{consultasLibreriaBean.dameEditoriales()}" var="edit"
+									itemLabel="#{edit.nombre}" itemValue="#{edit.idEditorial}" />
+							</h:selectOneMenu>
+						</div>
+					</div>
+					<div class="form-group">
+						<h:outputLabel class="col-sm-2 control-label"
+							value="#{msg.formAutor}" />
+						<div class="col-sm-10">
+
+							<h:selectManyListbox class="form-control"
+								value="#{gestionLibreriaBean.idAutor}">
+								<f:selectItems value="#{consultasLibreriaBean.dameAutores()}"
+									var="autor" itemLabel="#{autor.nombre}"
+									itemValue="#{autor.idAutor}" />
+							</h:selectManyListbox>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<h:commandButton class="btn btn-default" value="Submit"
+								action="#{gestionLibreriaBean.altaLibro}" />
+
+						</div>
+					</div>
+
+				</h:form>
+
+			</div>
+			<div class="tab-pane" id="altaAutor">...</div>
+			<div class="tab-pane" id="altaEditorial">...</div>
+		</div>
+		<script>
+			$('#myTab a[href="#altaLibro"]').tab('show');
+			$('#myTab a[href="#altaAutor"]').tab('show');
+			$('#myTab a[href="#altaEditorial"]').tab('show');
+		</script>
+	</ui:define>
+</ui:composition>

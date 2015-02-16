@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title><ui:insert name="title">Librería con JSF</ui:insert></title>
+	<!-- JQuery -->
+	<script src="#{request.contextPath}/resources/js/jquery-1.11.2.min.js" />
+
+	<!-- CSS y JS de Bootstrap-->
+	<link rel="stylesheet" href="#{request.contextPath}/resources/bootstrap/bootstrap.min.css" />
+	<script src="#{request.contextPath}/resources/bootstrap/bootstrap.min.js" />
+
+	<!-- Estilos propios aplicación -->
+	<link type="text/css" rel="stylesheet" href="#{request.contextPath}/resources/css/style.css" />
+
+	<!-- JScript propio aplicación -->
+	<script src="#{request.contextPath}/resources/js/utils.js" />
+</h:head>
+<h:body>
+	<div id="header">
+		<ui:insert name="header">
+				CABECERA
+	    </ui:insert>
+	</div>
+	<div id="menu">Menú</div>
+	<div id="content">
+	    <f:view locale="#{idiomaBean.locale}">
+			<ui:insert name="content">Contenido</ui:insert>
+		</f:view>
+	</div>
+	<div id="footer">
+		<ui:insert name="footer">
+	        	Este es el pie de la página
+	   	</ui:insert>
+	</div>
+</h:body>
+</html>

@@ -1,0 +1,45 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="content">
+	
+			<h:form>
+
+				<h:commandLink action="#{idiomaBean.cambiarIdioma('es')}">
+					<h:graphicImage value="/resources/images/spain.jpg" />
+				</h:commandLink>
+
+				<h:commandLink action="#{idiomaBean.cambiarIdioma('en')}">
+					<h:graphicImage value="/resources/images/inglaterra.jpg" />
+				</h:commandLink>
+
+				<h:commandLink action="#{idiomaBean.cambiarIdioma('de')}">
+					<h:graphicImage value="/resources/images/alemania.jpg" />
+				</h:commandLink>
+
+				<br />
+				<br />
+
+				<h:commandLink action="alta">
+            	#{msg.menu_alta}
+            </h:commandLink>
+				<br />
+
+				<h:commandLink action="verTodos">
+            	#{msg.menu_todos}
+            </h:commandLink>
+				<br />
+			</h:form>
+	</ui:define>
+</ui:composition>
+
+
+
+
+
+
+
+

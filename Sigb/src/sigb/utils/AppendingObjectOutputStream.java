@@ -30,6 +30,7 @@ public class AppendingObjectOutputStream extends ObjectOutputStream {
 		// this line added after another question
 		// showed a problem with the original
 		reset();
+		// OJO, necesario o se corta el fichero aunque no esté corrupto
 	}
 
 }

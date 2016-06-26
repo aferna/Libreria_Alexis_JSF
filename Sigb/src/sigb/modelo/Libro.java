@@ -11,6 +11,10 @@ import java.io.Serializable;
  */
 public final class Libro extends Material implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5780747827726914082L;
 	private String autor;
 	private String editorial;
 
@@ -32,6 +36,11 @@ public final class Libro extends Material implements Serializable {
 
 	public void setEditorial(String editorial) {
 		this.editorial = editorial;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString() + ", Autor=" + autor + ", Editorial=" + editorial;
 	}
 
 }

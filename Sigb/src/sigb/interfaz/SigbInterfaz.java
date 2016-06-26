@@ -17,6 +17,6 @@ public abstract class SigbInterfaz {
 	/**
 	 * Método que inicia la aplicación
 	 */
-	public abstract void inicioAplicacion();
+	public abstract void inicioAplicacion() throws Exception;
 
 }

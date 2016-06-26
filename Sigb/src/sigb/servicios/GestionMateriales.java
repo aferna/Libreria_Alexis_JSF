@@ -1,13 +1,15 @@
 package sigb.servicios;
 
 import java.io.EOFException;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,38 +18,46 @@ import sigb.utils.AppendingObjectOutputStream;
 
 /**
  * 
+ * Servicio que gestiona los materiales (alta, modificación, borrado...)
+ * 
  * @author Alexis
  *
  */
 public class GestionMateriales {
 
-	private static final String PATH = System.getProperty("user.dir");
+	private static final String PATH = System.getProperty("user.dir") + "/datosLibreria/";
 	private static final String NOMBRE_FICHERO = "materiales.txt";
 
 	public void nuevoMaterial(Material mat) {
 
-		// Creamos el fichero y una carpeta en la ruta del usuario
-		File carpetaDatos = new File(PATH + "/datosLibreria/");
-		carpetaDatos.mkdirs();
-		File ficheroDatos = new File(carpetaDatos, NOMBRE_FICHERO);
-
 		try {
-			// no existe creamos el fichero
-			if (!ficheroDatos.exists()) {
+			// Creamos el path del fichero
+			Path p = Paths.get(PATH + NOMBRE_FICHERO);
+			// Comprobamos si está vacio
+			boolean tieneDatos = Files.size(p) != 0;
 
-				FileOutputStream fos = new FileOutputStream(ficheroDatos);
-				ObjectOutputStream oos = new ObjectOutputStream(fos);
+			// NO tiene datos, incluye cabecera
+			if (!tieneDatos) {
+
+				FileOutputStream fout = new FileOutputStream(p.toString());
+				ObjectOutputStream oos = new ObjectOutputStream(fout);
 				oos.writeObject(mat);
 				oos.close();
 
-			} else {// existe y procedemos a AÑADIR
+			} else {// tiene datos y procedemos a añadir sin cabecera
 
-				FileOutputStream fos = new FileOutputStream(ficheroDatos);
-				AppendingObjectOutputStream oos = new AppendingObjectOutputStream(fos);
+				// OJO, el segundo parametro es true.
+				// Indica que abrimos el fichero para añadir
+				FileOutputStream fout = new FileOutputStream(p.toString(), true);
+
+				// Clase personalizada que evita que pinte una cabecera nueva en
+				// el fichero
+				AppendingObjectOutputStream oos = new AppendingObjectOutputStream(fout);
 				oos.writeObject(mat);
 				oos.close();
 
 			}
+
 		} catch (IOException e) {
 			System.out.println("Ha ocurrido un error inesperado");
 		}
@@ -56,15 +66,22 @@ public class GestionMateriales {
 	public List<Material> dameMateriales() {
 		List<Material> materiales = new ArrayList<>();
 
-		File carpetaDatos = new File(PATH + "/datosLibreria/");
-		File ficheroDatos = new File(carpetaDatos, NOMBRE_FICHERO);
-
-		FileInputStream fis;
-		boolean eof = false;
 		try {
-			fis = new FileInputStream(ficheroDatos);
+			// Creamos el path del fichero
+			Path p = Paths.get(PATH + NOMBRE_FICHERO);
+			// Comprobamos si está vacio
+			boolean tieneDatos = Files.size(p) != 0;
+
+			if (!tieneDatos)
+				throw new FileNotFoundException();
+
+			FileInputStream fis;
+			boolean eof = false;
+
+			fis = new FileInputStream(p.toString());
 			ObjectInputStream ois = new ObjectInputStream(fis);
 
+			// Recorre el fichero para obtener todos los materiales
 			while (!eof) {
 				try {
 					Material material = (Material) ois.readObject();

@@ -4,6 +4,9 @@
 package sigb.utils;
 
 /**
+ * 
+ * Tipo enumerado para definir los tipos de soportes digitales
+ * 
  * @author Alexis
  *
  */
